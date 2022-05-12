@@ -1,6 +1,5 @@
 import { Router } from "express"
-import createUserController from "../controllers/createUser.controller"
-import loginUserController from "../controllers/loginUser.controller"
+import { createUserController, loginUserController } from "../controllers"
 import verifyEmailDisponibility from "../middlewares/verifyEmailDisponibility.middleware"
 
 const router = Router()
