@@ -1,7 +1,14 @@
-import createUserService from "../services/createUser.service";
-import deleteUserService from "../services/deleteUser.service";
-import loginUserService from "../services/loginUser.service"
-import updateUserService from "../services/updateUser.service";
+import { 
+    createUserService, 
+    loginUserService, 
+    updateUserService, 
+    deleteUserService, 
+    profileUserService } from "../services"
+
+import jwt from "jsonwebtoken"
+import 'dotenv/config' 
+import { json } from "express/lib/response"
+const dotenvLoad = require('dotenv-load')
 
 const createUserController = async (request, response) => {
     
@@ -27,7 +34,6 @@ const updatedUserController = (request, response) => {
     const updatedUser = updateUserService(id, name, email)
 
     return response.json(updatedUser)
-
 }
 
 const deleteUserController = (request, response) => {
@@ -37,6 +43,17 @@ const deleteUserController = (request, response) => {
 
     return response.json(deletedUser)
 }
+ 
+const profileUserController = (request, response) => {
+    
+    let token = request.headers.authorization
+    const decoded = JSON.stringify(jwt.verify(token, "SECRET_KEY"))
+    let userEmail = decoded.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi)
+    
+    const usersProfile = profileUserService(userEmail)
 
-export { createUserController, loginUserController, updatedUserController, deleteUserController }
+    return response.json(usersProfile)
+}
+
+export { createUserController, loginUserController, updatedUserController, deleteUserController, profileUserController }
 
