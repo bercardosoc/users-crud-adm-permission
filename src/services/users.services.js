@@ -3,7 +3,7 @@ import users from "../database"
 import jwt from "jsonwebtoken"
 import * as bcrypt from "bcryptjs"
 
-const createUserService = async (name, email, password) => {
+const createUserService = async (name, email, password, isAdm) => {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -11,7 +11,7 @@ const createUserService = async (name, email, password) => {
         id: uuidv4(),
         name,
         email,
-        isAdm: true,
+        isAdm,
         password: hashedPassword,
         createdOn: Date().toString(),
         updatedOn: Date().toString()
