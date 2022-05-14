@@ -74,8 +74,19 @@ const deleteUserService = (id) => {
 }
 
 const profileUserService = (userEmail) => {
-    
-    return `Perfil do usuário de id ${userEmail}`   
+
+    const userIndex = users.findIndex((user) => user.email === userEmail[0])
+
+    if (userIndex === -1) {
+        return "User not found"
+    }
+
+    return users[userIndex]     
 }
 
-export { createUserService, loginUserService, updateUserService, deleteUserService, profileUserService }
+const allUsersService = () => {
+    
+    return users
+}
+
+export { createUserService, loginUserService, updateUserService, deleteUserService, profileUserService, allUsersService }

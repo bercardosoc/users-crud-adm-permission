@@ -3,12 +3,11 @@ import {
     loginUserService, 
     updateUserService, 
     deleteUserService, 
-    profileUserService } from "../services"
+    profileUserService,
+    allUsersService } from "../services"
 
 import jwt from "jsonwebtoken"
 import 'dotenv/config' 
-import { json } from "express/lib/response"
-const dotenvLoad = require('dotenv-load')
 
 const createUserController = async (request, response) => {
     
@@ -55,5 +54,19 @@ const profileUserController = (request, response) => {
     return response.json(usersProfile)
 }
 
-export { createUserController, loginUserController, updatedUserController, deleteUserController, profileUserController }
+const allUsersControllers = (request, response) => {
+    
+    const users = allUsersService()
+
+    return response.json(users)
+}
+
+export { 
+    createUserController, 
+    loginUserController, 
+    updatedUserController, 
+    deleteUserController, 
+    profileUserController,
+    allUsersControllers 
+}
 
