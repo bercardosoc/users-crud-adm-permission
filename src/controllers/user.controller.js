@@ -21,7 +21,7 @@ const createUserController = async (request, response) => {
 const loginUserController = (request, response) => {
     const { email, password } = request.body
 
-    const userLogin = loginUserService(email, password)
+    const userLogin = loginUserService(email, password, response)
 
     return response.json(userLogin)
 }

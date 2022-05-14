@@ -17,26 +17,32 @@ const createUserService = async (name, email, password, isAdm) => {
         updatedOn: Date().toString()
     }
 
+
     users.push(newUser)
 
     return newUser
 
 }
 
-const loginUserService = (email, password) => {
+const loginUserService = (email, password, response) => {
+    
     const user = users.find((element) => element.email === email)
-
+    
     if (!user) {
-        return "Email ou senha inválidos"
+        return response
+        .status(400)
+        .json({message: "Wrong email or password"})
     }
-
+    
     const passwordMatch = bcrypt.compareSync(password, user.password)
 
     if (!passwordMatch) {
-        return "Email ou senha inválidos"
+        return response
+        .status(400)
+        .json({message: "Wrong email or password"})
     }
 
-    const token = jwt.sign({ email: email }, "SECRET_KEY", { expiresIn: "1h" })
+    const token = jwt.sign({ email: email }, "SECRET_KEY", { expiresIn: "24h" })
 
     return { token }
 }
