@@ -10,7 +10,7 @@ router.post("/users", verifyEmailDisponibility, createUserController)
 router.post("/login", loginUserController)
 router.get("/users", verifyUserType, allUsersControllers)
 router.get("/users/profile", verifyAuthToken, verifyUserType, profileUserController)
-router.patch("/users/:id", verifyAuthToken, verifyUserType, updatedUserController)
-router.delete("/users/:id", verifyAuthToken, verifyUserType, deleteUserController)
+router.patch("/users/:id", verifyAuthToken, updatedUserController)
+router.delete("/users/:id", verifyAuthToken, deleteUserController)
 
 export default router

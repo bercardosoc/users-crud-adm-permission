@@ -13,8 +13,8 @@ const createUserService = async (name, email, password) => {
         email,
         isAdm: false,
         password: hashedPassword,
-        createdOn: Date.now().toString(),
-        updatedOn: Date.now().toString()
+        createdOn: Date().toString(),
+        updatedOn: Date().toString()
     }
 
     users.push(newUser)
@@ -46,7 +46,7 @@ const updateUserService = (id, name, email) => {
         id,
         name,
         email,
-        updatedOn: Date.now().toString(),
+        updatedOn: Date().toString(),
     }
 
     const userIndex = users.findIndex((e) => e.id === id)
