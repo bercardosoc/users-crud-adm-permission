@@ -11,7 +11,7 @@ const createUserService = async (name, email, password) => {
         id: uuidv4(),
         name,
         email,
-        isAdm: false,
+        isAdm: true,
         password: hashedPassword,
         createdOn: Date().toString(),
         updatedOn: Date().toString()
@@ -70,7 +70,7 @@ const deleteUserService = (id) => {
 
     users.splice(userIndex, 1)
 
-    return "Usuário excluído"
+    return "User deleted successfully"
 }
 
 const profileUserService = (userEmail) => {
